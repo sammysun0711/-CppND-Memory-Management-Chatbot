@@ -8,10 +8,11 @@ GraphNode::GraphNode(int id)
 
 GraphNode::~GraphNode()
 {
+    // Task 0: Debug Warm-Up task
     //// STUDENT CODE
     ////
 
-    delete _chatBot; 
+    // delete _chatBot;
 
     ////
     //// EOF STUDENT CODE
