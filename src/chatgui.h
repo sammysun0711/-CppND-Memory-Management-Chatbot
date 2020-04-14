@@ -14,8 +14,7 @@ private:
     wxBoxSizer *_dialogSizer;
     wxBitmap _image;
 
-    // Task 2: Exclusive Ownership 1
-    //// STUDENT CODE
+    //// DONE: STUDENT CODE
     ////
 
     //ChatLogic *_chatLogic;
