@@ -52,6 +52,7 @@ ChatBot::ChatBot(const ChatBot &source)
     _image = new wxBitmap(*source._image);
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
 }
 
 // Copy Assiginment
@@ -61,10 +62,11 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
     std::cout << "ChatBot Copy Assginment Operator" << std::endl;
     if (this == &source)
         return *this;
-    delete _image;
+    this->~ChatBot();
     _image = new wxBitmap(*source._image);
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     return *this;
 }
 
@@ -76,6 +78,7 @@ ChatBot::ChatBot(ChatBot &&source)
     _image = source._image;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     source._image = NULL;
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
@@ -88,10 +91,11 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
     std::cout << "ChatBot Move Assginment Operator" << std::endl;
     if (this == &source)
         return *this;
-    delete _image;
+    this->~ChatBot();
     _image = source._image;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     source._image = NULL;
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
@@ -145,7 +149,6 @@ void ChatBot::SetCurrentNode(GraphNode *node)
     std::uniform_int_distribution<int> dis(0, answers.size() - 1);
     std::string answer = answers.at(dis(generator));
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatLogic->SetChatbotHandle(this);
     // send selected node answer to user
     _chatLogic->SendMessageToUser(answer);
 }
