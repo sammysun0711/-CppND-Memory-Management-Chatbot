@@ -29,14 +29,14 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge)
 
 void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 {
-    _childEdges.emplace_back(std::move(edge));
+    _childEdges.push_back(std::move(edge));
 }
 
 //// DONE: STUDENT CODE
 ////
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
-    _chatBot = ChatBot(std::move(chatbot));
+    _chatBot = std::move(chatbot);
     _chatBot.SetCurrentNode(this);
 }
 
